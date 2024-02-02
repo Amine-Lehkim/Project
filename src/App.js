@@ -8,6 +8,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Footer from './weblines/footer';
 import './App.css';
+import Friends from './Comp/FriendList'; 
+import Favorites from './Comp/Favorites'; 
+import Wishlist from './Comp/Wishlist'; 
+import Reviews from './Comp/Reviews';
 
 const App = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
@@ -107,7 +111,7 @@ const App = () => {
                     </div>
                   </form>
                   <div>
-                    <Link className="btn btn-outline-primary m-2" to="/login">
+                    <Link className="btn btn-outline-secondary m-2" to="/login">
                       Login
                     </Link>
                   </div>
@@ -120,6 +124,10 @@ const App = () => {
                 />
                 <Route path="/game/:id" element={<GameDetails />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/friends" element={<Friends />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/wishlist" element={<Wishlist />} />
+                <Route path="/reviews" element={<Reviews />} />
               </Routes>
             </div>
           </div>

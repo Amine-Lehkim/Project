@@ -12,15 +12,27 @@
   
   .sidebar-item {
     display: block;
-    color: #61dafb;
+    color: #c7c7c7;
     text-decoration: none;
     padding: 10px 20px;
     font-size: 16px;
-    border-bottom: 1px solid #61dafb;
+    border-bottom: 1px solid #968f8f;
     transition: background-color 0.3s ease;
   }
   
   .sidebar-item:hover {
     background-color: #282c34;
+  }
+
+  .custom-button {
+    border: none;
+    outline: none;
+    padding: 10px; 
+    margin: 0;
+    font: inherit;
+    text-align: center;
+    color: inherit;
+    background: #007bff; 
+    cursor: pointer;
   }
   
