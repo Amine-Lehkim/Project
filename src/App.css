@@ -1,6 +1,22 @@
-.everything{
+.everything {
+  display: flex;
 }
 
+.sidebar {
+  background-color: #282c34;
+  height: 100vh;
+  width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 50px;
+  z-index: 1000; /* Ensure the sidebar appears above the content */
+}
+
+.content-container {
+  margin-left: 200px;
+  padding: 20px;
+}
 
 .star-rating {
   display: flex;
@@ -39,7 +55,6 @@
   width: 31px;
   display: inline-block;
 }
-
 
 .form-container {
   max-width: 400px;

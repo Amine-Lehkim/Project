@@ -11,7 +11,7 @@ import {
   MDBBtn
 } from 'mdb-react-ui-kit';
 import Test from './Comp/Comment'
-import Login from './Comp/login'
+import Login from './Comp/Login'
 import Register from './register'
 import './App.css'
 

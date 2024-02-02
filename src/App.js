@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import GameCards from './Comp/GameCards';
 import GameDetails from './Comp/GameDetails';
-import Login from './Comp/login'; 
+import Login from './Comp/Login';
+import Sidebar from './Comp/Sidebar'; 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Footer from './weblines/footer';
@@ -47,7 +48,10 @@ const App = () => {
   return (
     <div className='everything'>
       <Router>
-        <div className="container mt-3">
+        {/* Sidebar */}
+        <Sidebar />
+
+        <div className="container mt-3 content-container">
           <nav className="navbar navbar-expand-lg rounded-custom">
             <Link className="navbar-brand m-2" to="/">
               GameApp
@@ -103,7 +107,7 @@ const App = () => {
               </form>
               <div>
                 <Link className="btn btn-outline-primary m-2" to="/login">
-                  Register or Login
+                  Login
                 </Link>
               </div>
             </div>
@@ -114,7 +118,7 @@ const App = () => {
               element={<GameCards selectedGenre={selectedGenre} searchTerm={searchTerm} />}
             />
             <Route path="/game/:id" element={<GameDetails />} />
-            <Route path="/login" element={<Login />} /> 
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
         <Footer />
