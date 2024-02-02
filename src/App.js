@@ -121,7 +121,7 @@ const App = () => {
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>
-        <Footer />
+      <Footer />
       </Router>
     </div>
   );
