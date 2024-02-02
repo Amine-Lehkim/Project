@@ -48,80 +48,86 @@ const App = () => {
   return (
     <div className='everything'>
       <Router>
-        {/* Sidebar */}
         <Sidebar />
 
-        <div className="container mt-3 content-container">
-          <nav className="navbar navbar-expand-lg rounded-custom">
-            <Link className="navbar-brand m-2" to="/">
-              GameApp
-            </Link>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav mr-auto">
-                <li className="nav-item">
-                  <Link className="nav-link m-2" to="/" onClick={() => handleGenreChange('')}>
-                    All Games
-                  </Link>
-                </li>
-                <li className="nav-item m-2">
-                  <Dropdown>
-                    <Dropdown.Toggle variant="" id="dropdown-basic">
-                      Genres
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      {genres.map((genre) => (
-                        <Dropdown.Item
-                          key={genre}
-                          onClick={() => handleGenreChange(genre)}
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-10 offset-md-2 mt-3 content-container">
+              <nav className="navbar navbar-expand-lg rounded-custom">
+                <Link className="navbar-brand m-2" to="/">
+                  GameApp
+                </Link>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                  <ul className="navbar-nav mr-auto">
+                    <li className="nav-item">
+                      <Link className="nav-link m-2" to="/" onClick={() => handleGenreChange('')}>
+                        All Games
+                      </Link>
+                    </li>
+                    <li className="nav-item m-2">
+                      <Dropdown>
+                        <Dropdown.Toggle variant="" id="dropdown-basic">
+                          Genres
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                          {genres.map((genre) => (
+                            <Dropdown.Item
+                              key={genre}
+                              onClick={() => handleGenreChange(genre)}
+                            >
+                              {genre.charAt(0).toUpperCase() + genre.slice(1)}
+                            </Dropdown.Item>
+                          ))}
+                        </Dropdown.Menu>
+                      </Dropdown>
+                    </li>
+                  </ul>
+                  <form className="form-inline my-2 my-lg-0 ml-auto m-5">
+                    <div className="input-group">
+                      <input
+                        className="form-control m-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        onChange={(e) => handleSearch(e.target.value)}
+                        value={searchTerm}
+                      />
+                      <div className="input-group-append">
+                        <button
+                          className="btn btn-outline-secondary text-black m-2"
+                          type="button"
+                          onClick={() => {
+                            handleSearch('');
+                            clearSearch();
+                          }}
                         >
-                          {genre.charAt(0).toUpperCase() + genre.slice(1)}
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </li>
-              </ul>
-              <form className="form-inline my-2 my-lg-0 ml-auto m-5">
-                <div className="input-group">
-                  <input
-                    className="form-control m-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                    onChange={(e) => handleSearch(e.target.value)}
-                    value={searchTerm}
-                  />
-                  <div className="input-group-append">
-                    <button
-                      className="btn btn-outline-secondary text-black m-2"
-                      type="button"
-                      onClick={() => {
-                        handleSearch('');
-                        clearSearch();
-                      }}
-                    >
-                      Clear
-                    </button>
+                          Clear
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                  <div>
+                    <Link className="btn btn-outline-primary m-2" to="/login">
+                      Login
+                    </Link>
                   </div>
                 </div>
-              </form>
-              <div>
-                <Link className="btn btn-outline-primary m-2" to="/login">
-                  Login
-                </Link>
-              </div>
+              </nav>
+              <Routes>
+                <Route
+                  path="/"
+                  element={<GameCards selectedGenre={selectedGenre} searchTerm={searchTerm} />}
+                />
+                <Route path="/game/:id" element={<GameDetails />} />
+                <Route path="/login" element={<Login />} />
+              </Routes>
             </div>
-          </nav>
-          <Routes>
-            <Route
-              path="/"
-              element={<GameCards selectedGenre={selectedGenre} searchTerm={searchTerm} />}
-            />
-            <Route path="/game/:id" element={<GameDetails />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+          </div>
         </div>
-      <Footer />
+      
+      <div className='footer'>
+        <Footer/>
+      </div>
       </Router>
     </div>
   );
