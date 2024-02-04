@@ -16,6 +16,7 @@ import Reviews from './Comp/Reviews';
 const App = () => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [favorites, setFavorites] = useState([]);
 
   const handleGenreChange = (genre) => {
     setSelectedGenre(genre);
@@ -52,7 +53,9 @@ const App = () => {
   return (
     <div className='everything'>
       <Router>
-        <Sidebar />
+        <Sidebar>
+          <Favorites favorites={favorites} />
+        </Sidebar>
 
         <div className="container-fluid">
           <div className="row">

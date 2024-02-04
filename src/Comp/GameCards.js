@@ -1,13 +1,16 @@
-// GameCards.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import '../App.css'
+import '../App.css';
 
 const GameCards = ({ selectedGenre, searchTerm }) => {
   const [games, setGames] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
+    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    setFavorites(storedFavorites);
+
     const fetchGames = async () => {
       try {
         let apiUrl = 'https://api.rawg.io/api/games?key=88de0b77186a41b7960ab1e61efd24da&page_size=200';
@@ -30,9 +33,24 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
   }, [selectedGenre, searchTerm]);
 
   const handleTagClick = (tag) => {
-   
     console.log(`Clicked tag: ${tag.name}`);
   };
+
+  const handleFavoriteClick = (game) => {
+    const isFavorite = favorites.some((fav) => fav.id === game.id);
+
+    if (isFavorite) {
+      const updatedFavorites = favorites.filter((fav) => fav.id !== game.id);
+      setFavorites(updatedFavorites);
+    } else {
+      const updatedFavorites = [...favorites, game];
+      setFavorites(updatedFavorites);
+    }
+  };
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <div>
@@ -41,6 +59,7 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
         {games.map((game) => (
           <div key={game.id} className="col-md-4 mb-4">
             <div className="card">
+              
               <img
                 src={game.background_image}
                 className="card-img-top"
@@ -52,8 +71,8 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
                 <div className="tags">
                   {game.tags && Array.isArray(game.tags)
                     ? game.tags
-                        .filter((tag) => tag.language === 'eng') 
-                        .slice(0, 7) 
+                        .filter((tag) => tag.language === 'eng')
+                        .slice(0, 7)
                         .map((tag) => (
                           <span key={tag.id} className="badge rounded-pill bg-secondary me-2" onClick={() => handleTagClick(tag)}>
                             {tag.name}
@@ -61,13 +80,18 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
                         ))
                     : null}
                 </div>
-                <Link to={`/game/${game.id}`} style={{ textDecoration: 'none' }}>
-                  <button className="btn btn-secondary rounded-pill m-2">
-                    View Details
-                  </button>
-                </Link>
+
+                <div className="d-flex align-items-center">
+                  <Link to={`/game/${game.id}`} style={{ textDecoration: 'none' }}>
+                    <button className="btn btn-secondary rounded-pill m-2">
+                      View Details
+                    </button>
+                  </Link>
+                  <div className="heart-icon" onClick={() => handleFavoriteClick(game)}>
+                    {favorites.some((fav) => fav.id === game.id) ? '❤️' : '🤍'}
+                  </div>
+                </div>
               </div>
-              
             </div>
           </div>
         ))}
@@ -77,5 +101,3 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
 };
 
 export default GameCards;
-
-
