@@ -3,8 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
-const GameCards = ({ selectedGenre, searchTerm, favorites, setFavorites }) => {
+const GameCards = ({ selectedGenre, searchTerm }) => {
   const [games, setGames] = useState([]);
+  const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const [favorites, setFavorites] = useState(storedFavorites);
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -34,15 +36,21 @@ const GameCards = ({ selectedGenre, searchTerm, favorites, setFavorites }) => {
 
   const handleFavoriteClick = (game) => {
     const isFavorite = favorites.some((fav) => fav.id === game.id);
-
+  
     if (isFavorite) {
       const updatedFavorites = favorites.filter((fav) => fav.id !== game.id);
       setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     } else {
       const updatedFavorites = [...favorites, game];
       setFavorites(updatedFavorites);
+      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <div>
