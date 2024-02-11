@@ -85,10 +85,10 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
                       View Details
                     </button>
                   </Link>
-                  <button className={`heart-icon ${favorites.some((fav) => fav.id === game.id) ? 'red' : 'grey'}`} onClick={() => handleFavoriteClick(game)}>
-                    {favorites.some((fav) => fav.id === game.id) ? '❤️' : '🤍'}
-                  </button>
                 </div>
+                <button className={`btn ${favorites.some((fav) => fav.id === game.id) ? 'btn-danger' : 'btn-outline-secondary'} rounded-pill m-2`} onClick={() => handleFavoriteClick(game)}>
+                    {favorites.some((fav) => fav.id === game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
+                </button>
               </div>
             </div>
           </div>
