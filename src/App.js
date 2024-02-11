@@ -30,10 +30,6 @@ const App = () => {
     setSearchTerm('');
   };
 
-  const handleFavoritesChange = (game) => {
-    setFavorites((prevFavorites) => [...prevFavorites, game]);
-  };
-
   const genres = [
     'action',
     'adventure',
@@ -127,7 +123,7 @@ const App = () => {
               <Routes>
                 <Route
                   path="/"
-                  element={<GameCards selectedGenre={selectedGenre} searchTerm={searchTerm} onFavoritesChange={handleFavoritesChange} />}
+                  element={<GameCards selectedGenre={selectedGenre} searchTerm={searchTerm} favorites={favorites} setFavorites={setFavorites} />}
                 />
                 <Route path="/game/:id" element={<GameDetails />} />
                 <Route path="/login" element={<Login />} />

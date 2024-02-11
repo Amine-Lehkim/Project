@@ -3,15 +3,10 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
-
-const GameCards = ({ selectedGenre, searchTerm, onFavoritesChange }) => {
+const GameCards = ({ selectedGenre, searchTerm, favorites, setFavorites }) => {
   const [games, setGames] = useState([]);
-  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites')) || [];
-    setFavorites(storedFavorites);
-
     const fetchGames = async () => {
       try {
         let apiUrl = 'https://api.rawg.io/api/games?key=88de0b77186a41b7960ab1e61efd24da&page_size=200';
@@ -42,14 +37,10 @@ const GameCards = ({ selectedGenre, searchTerm, onFavoritesChange }) => {
 
     if (isFavorite) {
       const updatedFavorites = favorites.filter((fav) => fav.id !== game.id);
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       setFavorites(updatedFavorites);
-      onFavoritesChange(updatedFavorites);
     } else {
       const updatedFavorites = [...favorites, game];
-      localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
       setFavorites(updatedFavorites);
-      onFavoritesChange(updatedFavorites);
     }
   };
 
@@ -86,12 +77,9 @@ const GameCards = ({ selectedGenre, searchTerm, onFavoritesChange }) => {
                       View Details
                     </button>
                   </Link>
-                  <div
-                    className={`heart-icon ${favorites.some((fav) => fav.id === game.id) ? 'active' : ''}`}
-                    onClick={() => handleFavoriteClick(game)}
-                  >
-                    ❤️
-                  </div>
+                  <button className={`heart-icon ${favorites.some((fav) => fav.id === game.id) ? 'red' : 'grey'}`} onClick={() => handleFavoriteClick(game)}>
+                    {favorites.some((fav) => fav.id === game.id) ? '❤️' : '🤍'}
+                  </button>
                 </div>
               </div>
             </div>
