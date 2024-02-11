@@ -3,7 +3,6 @@ import axios from "axios";
 import { useParams, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
-import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import Comment from "./Comment";
 
@@ -177,23 +176,7 @@ const GameDetails = () => {
       <div>
         <Comment />
       </div>
-      {/* <Slide>
-            <div className="each-slide-effect">
-                <div style={{ 'backgroundImage': `url(${gameDetails.short_screenshots})` }}>
-                    <span>Slide 1</span>
-                </div>
-            </div>
-            <div className="each-slide-effect">
-                <div style={{ 'backgroundImage': `url(${gameDetails.short_screenshots})` }}>
-                    <span>Slide 2</span>
-                </div>
-            </div>
-            <div className="each-slide-effect">
-                <div style={{ 'backgroundImage': `url(${gameDetails.short_screenshots})` }}>
-                    <span>Slide 3</span>
-                </div>
-            </div>
-        </Slide> */}
+
     </div>
   );
 };

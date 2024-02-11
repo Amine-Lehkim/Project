@@ -88,7 +88,7 @@ const GameCards = ({ selectedGenre, searchTerm }) => {
                 </div>
                 <button className={`btn ${favorites.some((fav) => fav.id === game.id) ? 'btn-danger' : 'btn-outline-secondary'} rounded-pill m-2`} onClick={() => handleFavoriteClick(game)}>
                     {favorites.some((fav) => fav.id === game.id) ? 'Remove from Favorites' : 'Add to Favorites'}
-                </button>
+                  </button>
               </div>
             </div>
           </div>
